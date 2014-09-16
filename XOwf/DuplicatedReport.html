@@ -1,0 +1,188 @@
+﻿<html>
+  <head>
+    <META http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="http://netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css">
+    <link rel="stylesheet" href="http://netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap-theme.min.css">
+  </head>
+  <body>
+    <div class="container">
+      <h1>Обнаруженные дубликаты</h1>
+      <h2>Дублированный код. Размер: 303</h2>
+      <h3>Дублированные фрагменты:</h3>
+      <ul class="nav nav-pills">
+        <li class="active"><a href="#A1_1" data-toggle="tab">
+						Фрагмент 1</a></li>
+        <li><a href="#A1_2" data-toggle="tab">
+						Фрагмент 2</a></li>
+      </ul>
+      <div class="tab-content">
+        <div class="active tab-pane" id="A1_1">
+          <p style="margin-top: 10px;">XOwf\AI.cs строки 49 - 63</p>
+          <pre>if (Field.IsCellEqual(i, 0, figure) &amp;&amp; Field.IsCellEqual(i, 1, figure) &amp;&amp; Field.IsCellEqual(i, 2, Global.Empty)) {
+					Field.Y = 2;
+					Field.X = i;
+					return true;
+				}
+				if (Field.IsCellEqual(i, 0, figure) &amp;&amp; Field.IsCellEqual(i, 2, figure) &amp;&amp; Field.IsCellEqual(i, 1, Global.Empty)) {
+					Field.Y = 1;
+					Field.X = i;
+					return true;
+				}
+				if (Field.IsCellEqual(i, 1, figure) &amp;&amp; Field.IsCellEqual(i, 2, figure) &amp;&amp; Field.IsCellEqual(i, 0, Global.Empty)) {
+					Field.Y = 0;
+					Field.X = i;
+					return true;
+				}</pre>
+        </div>
+        <div class="tab-pane" id="A1_2">
+          <p style="margin-top: 10px;">XOwf\AI.cs строки 65 - 79</p>
+          <pre>if (Field.IsCellEqual(0, i, figure) &amp;&amp; Field.IsCellEqual(1, i, figure) &amp;&amp; Field.IsCellEqual(2, i, Global.Empty)) {
+					Field.Y = i;
+					Field.X = 2;
+					return true;
+				}
+				if (Field.IsCellEqual(0, i, figure) &amp;&amp; Field.IsCellEqual(2, i, figure) &amp;&amp; Field.IsCellEqual(1, i, Global.Empty)) {
+					Field.Y = i;
+					Field.X = 1;
+					return true;
+				}
+				if (Field.IsCellEqual(1, i, figure) &amp;&amp; Field.IsCellEqual(2, i, figure) &amp;&amp; Field.IsCellEqual(0, i, Global.Empty)) {
+					Field.Y = i;
+					Field.X = 0;
+					return true;
+				}</pre>
+        </div>
+      </div>
+      <h2>Дублированный код. Размер: 303</h2>
+      <h3>Дублированные фрагменты:</h3>
+      <ul class="nav nav-pills">
+        <li class="active"><a href="#A2_1" data-toggle="tab">
+						Фрагмент 1</a></li>
+        <li><a href="#A2_2" data-toggle="tab">
+						Фрагмент 2</a></li>
+      </ul>
+      <div class="tab-content">
+        <div class="active tab-pane" id="A2_1">
+          <p style="margin-top: 10px;">XOwf\AI.cs строки 82 - 96</p>
+          <pre>if (Field.IsCellEqual(0, 0, figure) &amp;&amp; Field.IsCellEqual(1, 1, figure) &amp;&amp; Field.IsCellEqual(2, 2, Global.Empty)) {
+				Field.Y = 2;
+				Field.X = 2;
+				return true;
+			}
+			if (Field.IsCellEqual(0, 0, figure) &amp;&amp; Field.IsCellEqual(2, 2, figure) &amp;&amp; Field.IsCellEqual(1, 1, Global.Empty)) {
+				Field.Y = 1;
+				Field.X = 1;
+				return true;
+			}
+			if (Field.IsCellEqual(1, 1, figure) &amp;&amp; Field.IsCellEqual(2, 2, figure) &amp;&amp; Field.IsCellEqual(0, 0, Global.Empty)) {
+				Field.Y = 0;
+				Field.X = 0;
+				return true;
+			}</pre>
+        </div>
+        <div class="tab-pane" id="A2_2">
+          <p style="margin-top: 10px;">XOwf\AI.cs строки 98 - 112</p>
+          <pre>if (Field.IsCellEqual(0, 2, figure) &amp;&amp; Field.IsCellEqual(1, 1, figure) &amp;&amp; Field.IsCellEqual(2, 0, Global.Empty)) {
+				Field.Y = 0;
+				Field.X = 2;
+				return true;
+			}
+			if (Field.IsCellEqual(0, 2, figure) &amp;&amp; Field.IsCellEqual(2, 0, figure) &amp;&amp; Field.IsCellEqual(1, 1, Global.Empty)) {
+				Field.Y = 1;
+				Field.X = 1;
+				return true;
+			}
+			if (Field.IsCellEqual(1, 1, figure) &amp;&amp; Field.IsCellEqual(2, 0, figure) &amp;&amp; Field.IsCellEqual(0, 2, Global.Empty)) {
+				Field.Y = 2;
+				Field.X = 0;
+				return true;
+			}</pre>
+        </div>
+      </div>
+      <h2>Дублированный код. Размер: 166</h2>
+      <h3>Дублированные фрагменты:</h3>
+      <ul class="nav nav-pills">
+        <li class="active"><a href="#A3_1" data-toggle="tab">
+						Фрагмент 1</a></li>
+        <li><a href="#A3_2" data-toggle="tab">
+						Фрагмент 2</a></li>
+      </ul>
+      <div class="tab-content">
+        <div class="active tab-pane" id="A3_1">
+          <p style="margin-top: 10px;">XOwf\Game.cs строки 63 - 68</p>
+          <pre>if (
+					(Field.IsCellEqual(i, 0, Global.Cross) &amp;&amp; Field.IsCellEqual(i, 1, Global.Cross) &amp;&amp; Field.IsCellEqual(i, 2, Global.Cross)) ||
+					(Field.IsCellEqual(i, 0, Global.Zero) &amp;&amp; Field.IsCellEqual(i, 1, Global.Zero) &amp;&amp; Field.IsCellEqual(i, 2, Global.Zero))
+					) {
+					return true;
+				}</pre>
+        </div>
+        <div class="tab-pane" id="A3_2">
+          <p style="margin-top: 10px;">XOwf\Game.cs строки 70 - 75</p>
+          <pre>if (
+					(Field.IsCellEqual(0, i, Global.Cross) &amp;&amp; Field.IsCellEqual(1, i, Global.Cross) &amp;&amp; Field.IsCellEqual(2, i, Global.Cross)) ||
+					(Field.IsCellEqual(0, i, Global.Zero) &amp;&amp; Field.IsCellEqual(1, i, Global.Zero) &amp;&amp; Field.IsCellEqual(2, i, Global.Zero))
+					) {
+					return true;
+				}</pre>
+        </div>
+      </div>
+      <h2>Дублированный код. Размер: 119</h2>
+      <h3>Дублированные фрагменты:</h3>
+      <ul class="nav nav-pills">
+        <li class="active"><a href="#A4_1" data-toggle="tab">
+						Фрагмент 1</a></li>
+        <li><a href="#A4_2" data-toggle="tab">
+						Фрагмент 2</a></li>
+      </ul>
+      <div class="tab-content">
+        <div class="active tab-pane" id="A4_1">
+          <p style="margin-top: 10px;">XOwf\Graphics.cs строки 46 - 52</p>
+          <pre>panel.CreateGraphics().DrawLine(
+				pen
+				, Field.X * Global.Length + Global.Margin
+				, Field.Y * Global.Length + Global.Margin
+				, Field.X * Global.Length + Global.Length + Global.Margin
+				, Field.Y * Global.Length + Global.Length + Global.Margin
+			);</pre>
+        </div>
+        <div class="tab-pane" id="A4_2">
+          <p style="margin-top: 10px;">XOwf\Graphics.cs строки 53 - 59</p>
+          <pre>panel.CreateGraphics().DrawLine(
+				pen
+				, Field.X * Global.Length + Global.Length + Global.Margin
+				, Field.Y * Global.Length + Global.Margin
+				, Field.X * Global.Length + Global.Margin
+				, Field.Y * Global.Length + Global.Length + Global.Margin
+			);</pre>
+        </div>
+      </div>
+      <h2>Дублированный код. Размер: 86</h2>
+      <h3>Дублированные фрагменты:</h3>
+      <ul class="nav nav-pills">
+        <li class="active"><a href="#A5_1" data-toggle="tab">
+						Фрагмент 1</a></li>
+        <li><a href="#A5_2" data-toggle="tab">
+						Фрагмент 2</a></li>
+      </ul>
+      <div class="tab-content">
+        <div class="active tab-pane" id="A5_1">
+          <p style="margin-top: 10px;">XOwf\Field.cs строки 28 - 32</p>
+          <pre>new int[3, 3]{
+			{ Global.Empty, Global.Empty, Global.Empty }, 
+			{ Global.Empty, Global.Empty, Global.Empty }, 
+			{ Global.Empty, Global.Empty, Global.Empty } 
+		}</pre>
+        </div>
+        <div class="tab-pane" id="A5_2">
+          <p style="margin-top: 10px;">XOwf\Field.cs строки 38 - 42</p>
+          <pre>new int[3, 3]{
+				{ Global.Empty, Global.Empty, Global.Empty }, 
+				{ Global.Empty, Global.Empty, Global.Empty }, 
+				{ Global.Empty, Global.Empty, Global.Empty } 
+			}</pre>
+        </div>
+      </div>
+    </div><script src="http://code.jquery.com/jquery.js"></script><script src="http://netdna.bootstrapcdn.com/bootstrap/3.0.0/js/bootstrap.min.js"></script></body>
+</html>
