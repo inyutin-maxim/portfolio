@@ -1,0 +1,362 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>2048</name>
+    </assembly>
+    <members>
+        <member name="T:_2048.Main">
+            <summary>
+            Главная форма
+            </summary>
+        </member>
+        <member name="M:_2048.Main.#ctor">
+            <summary>
+            Точка входа в приложение
+            </summary>
+        </member>
+        <member name="M:_2048.Main.Main_KeyDown(System.Object,System.Windows.Forms.KeyEventArgs)">
+            <summary>
+            Событие отпускания клавиши для главной формы 
+            </summary>
+        </member>
+        <member name="F:_2048.Main._isFirstStart">
+            <summary>
+            Первый запуск. Нужно чтобы при запуске отрисовалось поле 1 раз
+            </summary>
+        </member>
+        <member name="M:_2048.Main.FieldBox_Paint(System.Object,System.Windows.Forms.PaintEventArgs)">
+            <summary>
+            Перерисовать поле
+            </summary>
+        </member>
+        <member name="M:_2048.Main.новаяИграToolStripMenuItem_Click(System.Object,System.EventArgs)">
+            <summary>
+            Клик по пункту меню "Новая игра"
+            </summary>
+        </member>
+        <member name="M:_2048.Main.выходToolStripMenuItem_Click(System.Object,System.EventArgs)">
+            <summary>
+            Клик по пункту меню "Выход"
+            </summary>
+        </member>
+        <member name="M:_2048.Main.справкаToolStripMenuItem_Click(System.Object,System.EventArgs)">
+            <summary>
+            Клик по пункту меню "О программе"
+            </summary>
+        </member>
+        <member name="F:_2048.Main.components">
+            <summary>
+            Требуется переменная конструктора.
+            </summary>
+        </member>
+        <member name="M:_2048.Main.Dispose(System.Boolean)">
+            <summary>
+            Освободить все используемые ресурсы.
+            </summary>
+            <param name="disposing">истинно, если управляемый ресурс должен быть удален; иначе ложно.</param>
+        </member>
+        <member name="M:_2048.Main.InitializeComponent">
+            <summary>
+            Обязательный метод для поддержки конструктора - не изменяйте
+            содержимое данного метода при помощи редактора кода.
+            </summary>
+        </member>
+        <member name="T:_2048.Graphic">
+            <summary>
+            Графика
+            </summary>
+        </member>
+        <member name="F:_2048.Graphic.Pen">
+            <summary>
+            Объект для рисования прямых линий
+            </summary>
+        </member>
+        <member name="M:_2048.Graphic.GetColor(System.Int32)">
+            <summary>
+            Получить цвет для клетки по значению
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:_2048.Graphic.DrawField">
+            <summary>
+            Нарисовать игровое поле
+            </summary>
+        </member>
+        <member name="M:_2048.Graphic.DrawContent">
+            <summary>
+            Нарисовать содержимое поля
+            </summary>
+        </member>
+        <member name="P:_2048.Graphic.FieldBox">
+            <summary>
+            Компонент для отрисовки поля
+            </summary>
+        </member>
+        <member name="T:_2048.Global">
+            <summary>
+            Глобальные переменные и константы
+            </summary>
+        </member>
+        <member name="F:_2048.Global.Empty">
+            <summary>
+            Пустое значение
+            </summary>
+        </member>
+        <member name="F:_2048.Global.Dimensionality">
+            <summary>
+            Размерность поля WхH
+            </summary>
+        </member>
+        <member name="F:_2048.Global.Margin">
+            <summary>
+            Отступ
+            </summary>
+        </member>
+        <member name="F:_2048.Global.PenWidth">
+            <summary>
+            Толщина пера
+            </summary>
+        </member>
+        <member name="F:_2048.Global.CellSize">
+            <summary>
+            Длина клетки WхH
+            </summary>
+        </member>
+        <member name="F:_2048.Global.EdgeOfField">
+            <summary>
+            Край поля нижний/правый
+            </summary>
+        </member>
+        <member name="F:_2048.Global.FillMargin">
+            <summary>
+            Отступ для закрашиваемого прямоугольника
+            </summary>
+        </member>
+        <member name="F:_2048.Global.TextMargin">
+            <summary>
+            Отступ для текста закрашиваемого прямоугольника
+            </summary>
+        </member>
+        <member name="F:_2048.Global.FillCellSize">
+            <summary>
+            Длина клетки для закрашиваемого прямоугольника
+            </summary>
+        </member>
+        <member name="T:_2048.Field">
+            <summary>
+            Игровое поле
+            </summary>
+        </member>
+        <member name="F:_2048.Field._field">
+            <summary>
+            Игровое поле
+            </summary>
+        </member>
+        <member name="F:_2048.Field._temp">
+            <summary>
+            Временное поле
+            </summary>
+        </member>
+        <member name="F:_2048.Field.OldField">
+            <summary>
+            Старое значение поля
+            </summary>
+        </member>
+        <member name="F:_2048.Field.RandomNumber">
+            <summary>
+            Случайное число
+            </summary>
+        </member>
+        <member name="M:_2048.Field.Clear">
+            <summary>
+            Очистить поле
+            </summary>
+        </member>
+        <member name="M:_2048.Field.Set(System.Int32,System.Int32,System.Int32)">
+            <summary>
+            Установить значение
+            </summary>
+            <param name="line">Строка</param>
+            <param name="column">Столбец</param>
+            <param name="value">Значение</param>
+        </member>
+        <member name="M:_2048.Field.Move(System.Windows.Forms.Keys)">
+            <summary>
+            Передвинуть если возможно
+            </summary>
+            <param name="key">Код нажатой клавиши</param>
+        </member>
+        <member name="M:_2048.Field.MoveToLeft">
+            <summary>
+            Передвинуть влево
+            </summary>
+        </member>
+        <member name="M:_2048.Field.MoveToRight">
+            <summary>
+            Передвинуть вправо
+            </summary>
+        </member>
+        <member name="M:_2048.Field.MoveToUp">
+            <summary>
+            Передвинуть вверх 
+            </summary>
+        </member>
+        <member name="M:_2048.Field.MoveToDown">
+            <summary>
+            Передвинуть вниз
+            </summary>
+        </member>
+        <member name="M:_2048.Field.ShiftToLeft(System.Int32,System.Int32)">
+            <summary>
+            Сдвинуть влево
+            </summary>
+            <param name="line">Строка</param>
+            <param name="column">Столбец</param>
+        </member>
+        <member name="M:_2048.Field.ShiftToRight(System.Int32,System.Int32)">
+            <summary>
+            Сдвинуть вправо
+            </summary>
+            <param name="line">Строка</param>
+            <param name="column">Столбец</param>
+        </member>
+        <member name="M:_2048.Field.ShiftToDown">
+            <summary>
+            Сдвинуть вниз
+            </summary>
+        </member>
+        <member name="M:_2048.Field.ShiftToUp">
+            <summary>
+            Сдвинуть вверх
+            </summary>
+        </member>
+        <member name="M:_2048.Field.IsLose">
+            <summary>
+            Проверка на проигрыш
+            </summary>
+        </member>
+        <member name="M:_2048.Field.AddNewValue">
+            <summary>
+            Добавить новое случайное значение
+            </summary>
+        </member>
+        <member name="M:_2048.Field.RandomValue">
+            <summary>
+            Случайное значение
+            </summary>
+            <returns>С 80% вероятностью возвращает 2, в остальных 20% случаев 4</returns>
+        </member>
+        <member name="M:_2048.Field.GetValue(System.Int32,System.Int32)">
+            <summary>
+            Получить значение клетки
+            </summary>
+            <param name="line">Строка</param>
+            <param name="column">Столбец</param>
+            <returns>Значение</returns>
+        </member>
+        <member name="M:_2048.Field.CopyTo(System.Int32[0:,0:],System.Int32[0:,0:])">
+            <summary>
+            Копирование из одного массива в другой
+            </summary>
+            <param name="current">Исходный массив</param>
+            <param name="destiny">Массив назначения</param>
+        </member>
+        <member name="P:_2048.Field.IsChanged">
+            <summary>
+            Проверка есть ли изменения
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="P:_2048.Field.IsShifted">
+            <summary>
+            Проверка сдвинуто ли
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="T:_2048.Game">
+            <summary>
+            Игра
+            </summary>
+        </member>
+        <member name="M:_2048.Game.New">
+            <summary>
+            Новая игра
+            </summary>
+        </member>
+        <member name="M:_2048.Game.DoStep(System.Windows.Forms.Keys)">
+            <summary>
+            Сделать шаг
+            </summary>
+            <param name="key">Код клавиши</param>
+        </member>
+        <member name="M:_2048.Game.IsVictory">
+            <summary>
+            Проверка на победу
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="P:_2048.Game.PointCount">
+            <summary>
+            Количество очков
+            </summary>
+        </member>
+        <member name="P:_2048.Game.IsContinueGame">
+            <summary>
+            Продолжить игру
+            </summary>
+        </member>
+        <member name="T:_2048.Properties.Resources">
+            <summary>
+              Класс ресурса со строгой типизацией для поиска локализованных строк и т.д.
+            </summary>
+        </member>
+        <member name="P:_2048.Properties.Resources.ResourceManager">
+            <summary>
+              Возвращает кэшированный экземпляр ResourceManager, использованный этим классом.
+            </summary>
+        </member>
+        <member name="P:_2048.Properties.Resources.Culture">
+            <summary>
+              Перезаписывает свойство CurrentUICulture текущего потока для всех
+              обращений к ресурсу с помощью этого класса ресурса со строгой типизацией.
+            </summary>
+        </member>
+        <member name="P:_2048.Properties.Resources.AboutText">
+             <summary>
+               Ищет локализованную строку, похожую на О программе &quot;2048&quot;
+            
+            Разработчик: Инютин Максим Николаевич 2014г..
+             </summary>
+        </member>
+        <member name="P:_2048.Properties.Resources.ErrorText">
+            <summary>
+              Ищет локализованную строку, похожую на Ошибка.
+            </summary>
+        </member>
+        <member name="P:_2048.Properties.Resources.InformationText">
+            <summary>
+              Ищет локализованную строку, похожую на Информация.
+            </summary>
+        </member>
+        <member name="P:_2048.Properties.Resources.LoseText">
+            <summary>
+              Ищет локализованную строку, похожую на Вы проиграли! Если хотите сыграть еще раз, нажмите &quot;Да&quot;, чтобы выйти из игры нажмите &quot;Нет&quot;.
+            </summary>
+        </member>
+        <member name="P:_2048.Properties.Resources.StatusText">
+            <summary>
+              Ищет локализованную строку, похожую на Колличество очков: .
+            </summary>
+        </member>
+        <member name="P:_2048.Properties.Resources.VictoryText">
+            <summary>
+              Ищет локализованную строку, похожую на Вы победили! Если хотите сыграть еще раз, нажмите &quot;Да&quot;, если хотите продолжить нажмите &quot;Нет&quot;.
+            </summary>
+        </member>
+        <member name="M:_2048.Program.Main">
+            <summary>
+            Главная точка входа для приложения.
+            </summary>
+        </member>
+    </members>
+</doc>
