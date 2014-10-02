@@ -1,0 +1,67 @@
+﻿@model IEnumerable<Mvc5.Entities.dynamic_page>
+
+@{
+    ViewBag.Title = "Список текстовых страниц";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+}
+
+<h2>@ViewBag.Title</h2>
+
+<p>
+    @Html.ActionLink( "Добавить страницу", "Create", null, null, new {
+    @class = "btn btn-link"
+} )
+</p>
+<table class="table">
+    <tr>
+        <th>Алиас
+        </th>
+        <th>Заголовок
+        </th>
+        <th>Дата создания
+        </th>
+        <th>Отобразить
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach ( var item in Model ) {
+        <tr>
+            <td>
+                @Html.DisplayFor( modelItem => item.alias )
+            </td>
+            <td>
+                @Html.Raw( item.title )
+            </td>
+            <td>
+                @Html.DisplayFor( modelItem => item.create_date )
+            </td>
+            <td>
+                @Html.CheckBoxFor( modelItem => item.visible )
+            </td>
+            <td>
+                @Html.ActionLink( "Редактировать", "Edit", new {
+               alias = item.alias
+           }, new {
+               @class = "btn btn-link"
+           } ) |
+            @Html.ActionLink( "Подробно", "Details", new {
+           alias = item.alias
+       }, new {
+           @class = "btn btn-link"
+       } ) |
+            @Html.ActionLink( "Удалить", "Delete", new {
+           alias = item.alias
+       }, new {
+           @class = "btn btn-link"
+       } )
+            </td>
+        </tr>
+    }
+
+</table>
+<p>
+    @Html.ActionLink( "Добавить страницу", "Create", null, null, new {
+    @class = "btn btn-link"
+} )
+</p>

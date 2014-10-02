@@ -1,0 +1,26 @@
+﻿@model Mvc5.Entities.dynamic_page
+
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Areas/Default/Views/Shared/_Layout.cshtml";
+}
+<br>
+<div>
+    <div>
+        @Html.DisplayFor( model => model.create_date )
+    </div>
+
+    <h2>
+        @Html.Raw( Model.title )
+    </h2>
+
+    <div>
+        @Html.Raw( Model.content )
+    </div>
+</div>
+<p>
+    @Html.ActionLink( "Редактировать", "Edit", new {
+    alias = Model.alias
+} ) |
+    @Html.ActionLink( "Назад к списку", "Index" )
+</p>

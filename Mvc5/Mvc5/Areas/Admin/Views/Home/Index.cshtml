@@ -1,0 +1,9 @@
+﻿@model Mvc5.Entities.dynamic_page
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>@Model.title</h2>
+
+<div class="container">@Html.Raw( Model.content )</div>
+
