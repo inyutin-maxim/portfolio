@@ -25,7 +25,7 @@ namespace Mvc5.Areas.Admin.Controllers {
 		//
 		// GET: /Admin/DynamicTextPage/Create
 		public ActionResult Create() {
-			return View();
+			return View("Edit");
 		}
 
 		//
@@ -40,7 +40,11 @@ namespace Mvc5.Areas.Admin.Controllers {
 				return View();
 			}
 		}
-
+		//
+		// GET: /Admin/DynamicTextPage/Create
+		public ActionResult Edit() {
+			return View( );
+		}
 		/// <summary>
 		/// Изменить текстовую страницу
 		/// </summary>

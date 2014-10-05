@@ -117,6 +117,7 @@
     </Content>
     <Content Include="Areas\Admin\Views\TextPage\Index.cshtml" />
     <Content Include="Areas\Admin\Views\TextPage\Details.cshtml" />
+    <Content Include="Areas\Admin\Views\TextPage\Edit.cshtml" />
     <None Include="js\jquery-1.10.2.intellisense.js" />
     <Content Include="js\bootstrap.min.js" />
     <Content Include="js\jquery-1.10.2.min.js" />

@@ -41,9 +41,9 @@ namespace Mvc5.Areas.Admin.Models
 		/// </summary>
 		/// <param name="data">Данные страницы</param>
 		public static void Save( dynamic_page data ) {
-			data.content = data.content.RemoveJS();
-			data.alias = data.content.RemoveJS();
-			data.title = data.title.RemoveJS();
+			data.content = data.content.RemoveJs();
+			data.alias = data.content.RemoveJs();
+			data.title = data.title.RemoveJs();
 
 			if ( data.id <= 0 ) {
 				data.create_date = DateTime.Now;
