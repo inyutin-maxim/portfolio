@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 
 namespace Kinoteatr {
@@ -13,6 +14,14 @@ namespace Kinoteatr {
 			get;
 			set;
 		}
+		/// <summary>
+		/// Время сеанса
+		/// </summary>
+		public DateTime Time {
+			get;
+			set;
+		}
+
 		/// <summary>
 		/// Места
 		/// </summary>
