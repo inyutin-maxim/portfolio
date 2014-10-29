@@ -9,7 +9,13 @@ using System.Xml.Linq;
 using Kinoteatr.Properties;
 
 namespace Kinoteatr {
+	/// <summary>
+	/// Главная форма
+	/// </summary>
 	public partial class Main : Form {
+		/// <summary>
+		/// Конструктор
+		/// </summary>
 		public Main() {
 			InitializeComponent();
 		}
@@ -26,40 +32,40 @@ namespace Kinoteatr {
 		/// <summary>
 		/// Список сеансов
 		/// </summary>
-		public List<Seans> SeansList = new List<Seans>();
+		private readonly List<Seans> _seansList = new List<Seans>();
 		/// <summary>
 		/// Координаты Х для кнопок
 		/// </summary>
-		public int[] BtnX = { 10, 45, 80, 115, 150, 185, 220, 255, 290, 325 };
+		private readonly int[] _btnX = { 10, 45, 80, 115, 150, 185, 220, 255, 290, 325 };
 		/// <summary>
 		/// Координаты Y для кнопок
 		/// </summary>
-		public int[] BtnY = { 20, 45, 70, 95, 120, 145, 170, 195 };
+		private readonly int[] _btnY = { 20, 45, 70, 95, 120, 145, 170, 195 };
 		/// <summary>
 		/// Цветовое выделение стоимости места
 		/// </summary>
-		public Color[] BtnClr = { Color.Green, Color.Red, Color.Blue, Color.Brown, Color.LightGray };
+		private readonly Color[] _btnClr = { Color.Green, Color.Red, Color.Blue, Color.Brown, Color.LightGray };
 		/// <summary>
 		/// Индекс текущего сеанса
 		/// </summary>
-		public int SeansIndex {
+		private int SeansIndex {
 			get;
 			set;
 		}
 		/// <summary>
 		/// Список мест
 		/// </summary>
-		public List<Button> PlaceList = new List<Button>();
+		private readonly List<Button> _placeList = new List<Button>();
 		/// <summary>
 		/// Место
 		/// </summary>
-		public Place TempPlace = new Place();
+		private readonly Place _tempPlace = new Place();
 		#endregion
 		/// <summary>
 		/// Выручка за день
 		/// </summary>
 		/// <returns></returns>
-		public double RevenueForDay(List<Seans> seans) {
+		private static double RevenueForDay(IEnumerable<Seans> seans) {
 			return seans.Sum( item => item.Revenue() );
 		}
 
@@ -72,7 +78,7 @@ namespace Kinoteatr {
 				_streamToPrint = new StreamReader(path);
 				try {
 					_printFont = new Font("Arial", 10);
-					PrintDocument pd = new PrintDocument();
+					var pd = new PrintDocument();
 					pd.PrintPage += pd_PrintPage;
 					// Печать документа.
 					pd.Print();
@@ -87,46 +93,40 @@ namespace Kinoteatr {
 		///  Событие генерируемое для каждой распечатанной страницы
 		/// </summary>
 		private void pd_PrintPage(object sender, PrintPageEventArgs ev) {
-			float linesPerPage = 0;
-			float yPos = 0;
-			int count = 0;
+			var count = 0;
 			float leftMargin = ev.MarginBounds.Left;
 			float topMargin = ev.MarginBounds.Top;
 			String line = null;
 
 			// Вычислить число строк на страницу.
-			linesPerPage = ev.MarginBounds.Height /
-			   _printFont.GetHeight(ev.Graphics);
+			var linesPerPage = ev.MarginBounds.Height /
+			                     _printFont.GetHeight(ev.Graphics);
 
 			while (count < linesPerPage &&
 			   ((line = _streamToPrint.ReadLine()) != null)) {
-				yPos = topMargin + (count * _printFont.GetHeight(ev.Graphics));
+				var yPos = topMargin + (count * _printFont.GetHeight(ev.Graphics));
 				ev.Graphics.DrawString(line, _printFont, Brushes.Black,
 				   leftMargin, yPos, new StringFormat());
 				count++;
 			}
 
 			// Нужно ли печатать дополнительную страницу
-			if (line != null) {
-				ev.HasMorePages = true;
-			} else {
-				ev.HasMorePages = false;
-			}
+			ev.HasMorePages = line != null;
 		}
 
 		/// <summary>
 		/// Загрузка данных в XML документ
 		/// </summary>
 		/// <param name="path">Путь к XML документу</param>
-		public void LinqWriteXml(string path) {
+		private void LinqWriteXml(string path) {
 
 			if (File.Exists(path)) {
 				File.Delete(path);
 			}
 
-			XElement element = new XElement("head");
-			foreach (var item in SeansList) {
-				XElement subElement = new XElement(item.Film.Replace(" ", "_"));
+			var element = new XElement("head");
+			foreach (var item in _seansList) {
+				var subElement = new XElement(item.Film.Replace(" ", "_"));
 				foreach (var place in item.Places) {
 					subElement.Add(
 						new XElement("Place",
@@ -137,52 +137,54 @@ namespace Kinoteatr {
 				}
 				element.Add(subElement);
 			}
-			XDocument xDoc = new XDocument(element);
+			var xDoc = new XDocument(element);
 			xDoc.Save(path);
 		}
 		/// <summary>
 		/// Прочитать XML документ
 		/// </summary>
 		/// <param name="path">Путь к XML документу</param>
-		public void LinqReadXml(string path) {
+		private void LinqReadXml(string path) {
 			if (!File.Exists(path)) {
 				return;
 			}
-			XDocument doc = XDocument.Load(path);
-			string filmName = "";
-			foreach (XElement film in doc.Root.Elements()) {
-				List<Place> tempPlaces = new List<Place>();
-				foreach (XElement place in film.Elements()) {
-					foreach (XElement item in place.Elements()) {
-						double tempCost = 0;
-						bool tempisOccupied = false;
+			var doc = XDocument.Load(path);
+			if (doc.Root == null) {
+				return;
+			}
+			foreach (var film in doc.Root.Elements()) {
+				var tempPlaces = new List<Place>();
+				foreach (var place in film.Elements()) {
+					foreach (var item in place.Elements()) {
 						switch (item.Name.LocalName) {
 							case "Cost": {
+								double tempCost;
 								double.TryParse(item.Value, out tempCost);
-								TempPlace.Cost = tempCost;
+								_tempPlace.Cost = tempCost;
 							}
-							break;
+								break;
 							case "Occupied": {
+								bool tempisOccupied;
 								bool.TryParse(item.Value, out tempisOccupied);
-								TempPlace.IsOccupied = tempisOccupied;
+								_tempPlace.IsOccupied = tempisOccupied;
 							}
-							break;
+								break;
 						}
 					}
 					tempPlaces.Add(
 						new Place {
-							Cost = TempPlace.Cost,
-							IsOccupied = TempPlace.IsOccupied
+							Cost = _tempPlace.Cost,
+							IsOccupied = _tempPlace.IsOccupied
 						}
-					);
+						);
 				}
-				filmName = film.Name.LocalName;
-				SeansList.Add(
+				var filmName = film.Name.LocalName;
+				_seansList.Add(
 					new Seans {
 						Film = filmName,
 						Places = tempPlaces
 					}
-				);
+					);
 			}
 		}
 		/// <summary>
@@ -191,19 +193,19 @@ namespace Kinoteatr {
 		private void Main_Load(object sender, EventArgs e) {
 			LinqReadXml("data.xml");
 			// Заполняем список сеансов на форму
-			foreach (var seans in SeansList) {
+			foreach (var seans in _seansList) {
 				lbSeansList.Items.Add(seans.Film);
 			}
-			int index = 0;
+			var index = 0;
 			// Заполнить список мест
-			for (int i = BtnY.Length - 1; i > 0; i--) {
-				foreach ( int t in BtnX ) {
-					PlaceList.Add(AddBtn(t, BtnY[i], index, BtnClr[GetColorIndex(index)]));
+			for (var i = _btnY.Length - 1; i > 0; i--) {
+				foreach ( var t in _btnX ) {
+					_placeList.Add(AddBtn(t, _btnY[i], index, _btnClr[GetColorIndex(index)]));
 					index++;
 				}
 			}
-			for (int i = 3; i < 8; i++) {
-				PlaceList.Add(AddBtn(BtnX[i], BtnY[0], index, BtnClr[GetColorIndex(index)]));
+			for (var i = 3; i < 8; i++) {
+				_placeList.Add(AddBtn(_btnX[i], _btnY[0], index, _btnClr[GetColorIndex(index)]));
 				index++;
 			}
 		}
@@ -211,10 +213,10 @@ namespace Kinoteatr {
 		/// Заполнить места в зрительном зале
 		/// </summary>
 		/// <returns></returns>
-		public List<Place> FillPlaces() {
-			List<Place> temp = new List<Place>();
+		private static List<Place> FillPlaces() {
+			var temp = new List<Place>();
 			// Заполняем места
-			for (int i = 0; i < 75; i++) {
+			for (var i = 0; i < 75; i++) {
 				temp.Add(
 					new Place {
 						Cost = (GetColorIndex(i) + 1) * 100,
@@ -232,8 +234,8 @@ namespace Kinoteatr {
 		/// <param name="y"></param>
 		/// <param name="index"></param>
 		/// <param name="clr">Цвет</param>
-		public Button AddBtn(int x, int y, int index, Color clr) {
-			Button btn = new Button {
+		private Button AddBtn(int x, int y, int index, Color clr) {
+			var btn = new Button {
 				Name = "Btn" + index,
 				Text = ( index + 1 ) + "",
 				Tag = index,
@@ -250,28 +252,28 @@ namespace Kinoteatr {
 		/// По нажатии на кнопку
 		/// </summary>
 		private void Btn_Click(object sender, EventArgs e) {
-			Button btn = sender as Button;
+			var btn = sender as Button;
 			if ( btn == null ) {
 				return;
 			}
-			int index = (int)btn.Tag;
+			var index = (int)btn.Tag;
 			if (SeansIndex >= 0) {
-				bool isOccupied = SeansList[SeansIndex].Places[index].IsOccupied;
+				var isOccupied = _seansList[SeansIndex].Places[index].IsOccupied;
 				if (isOccupied) {
-					var response = MessageBox.Show("Вы уверены что хотите снять бронь с этого места?", "Информация", MessageBoxButtons.YesNo);
+					var response = MessageBox.Show(Resources.uncheck, Resources.info, MessageBoxButtons.YesNo);
 					if (response == DialogResult.No) {
 						return;
 					}
 				}
-				SeansList[SeansIndex].Places[index].IsOccupied = !isOccupied;
+				_seansList[SeansIndex].Places[index].IsOccupied = !isOccupied;
 
-				if (SeansList[SeansIndex].Places[index].IsOccupied) {
+				if (_seansList[SeansIndex].Places[index].IsOccupied) {
 					btn.Text = string.Empty;
 					btn.BackColor = Color.LightGray;
 
 				} else {
 					btn.Text = (index + 1) + "";
-					btn.BackColor = BtnClr[GetColorIndex(index)];
+					btn.BackColor = _btnClr[GetColorIndex(index)];
 				}
 			} else {
 				MessageBox.Show(Resources.PleaseSelectSeance);
@@ -297,40 +299,48 @@ namespace Kinoteatr {
 		/// </summary>
 		private void lbSeansList_SelectedIndexChanged(object sender, EventArgs e) {
 			SeansIndex = lbSeansList.SelectedIndex;
-			if ( SeansList.Count <= 0 ) {
+			if ( _seansList.Count <= 0 ) {
 				return;
 			}
-			for (int i = 0; i < 75; i++) {
-				if (SeansList[SeansIndex].Places[i].IsOccupied) {
-					PlaceList[i].BackColor = Color.LightGray;
-					PlaceList[i].Text = "";
+			for (var i = 0; i < 75; i++) {
+				if (_seansList[SeansIndex].Places[i].IsOccupied) {
+					_placeList[i].BackColor = Color.LightGray;
+					_placeList[i].Text = "";
 				} else {
-					PlaceList[i].BackColor = BtnClr[GetColorIndex(i)];
-					PlaceList[i].Text = (i + 1) + "";
+					_placeList[i].BackColor = _btnClr[GetColorIndex(i)];
+					_placeList[i].Text = (i + 1) + "";
 				}
 			}
 		}
-
+		/// <summary>
+		/// Пункт меню "Прибыль за текущий сеанс"
+		/// </summary>
 		private void ToolStripMenuItemSeans_Click(object sender, EventArgs e) {
 			if (SeansIndex >= 0) {
-				MessageBox.Show(string.Format("Прибыль за текущий сеанс составляет: {0} рублей", SeansList[SeansIndex].Revenue()));
+				MessageBox.Show(string.Format("Прибыль за текущий сеанс составляет: {0} рублей", _seansList[SeansIndex].Revenue()));
 			}
 		}
-
+		/// <summary>
+		/// Пункт меню "Проверить наличие свободных мест"
+		/// </summary>
 		private void toolStripMenuItemFreePlaces_Click(object sender, EventArgs e) {
-			if (SeansIndex >= 0 && SeansList[SeansIndex].EmptyPlaceExist()) {
-				MessageBox.Show("На данный сеанс доступны свободные места.");
+			if (SeansIndex >= 0 && _seansList[SeansIndex].EmptyPlaceExist()) {
+				MessageBox.Show(Resources.freePlaces);
 			} else {
-				MessageBox.Show("Нет доступных свободных мест.");
+				MessageBox.Show(Resources.nonFreePlaces);
 			}
 		}
-
+		/// <summary>
+		/// Прибыль за день
+		/// </summary>
 		private void ToolStripMenuItemDay_Click(object sender, EventArgs e) {
 			if (SeansIndex >= 0) {
-				MessageBox.Show(string.Format("Прибыль за текущий рабочий день составляет: {0} рублей", RevenueForDay(SeansList)));
+				MessageBox.Show(string.Format("Прибыль за текущий рабочий день составляет: {0} рублей", RevenueForDay(_seansList)));
 			}
 		}
-
+		/// <summary>
+		/// Установить тестовые данные
+		/// </summary>
 		private void btnSetTestData_Click(object sender, EventArgs e) {
 			// Заполняем места
 			for (var i = 0; i < 75; i++) {
@@ -341,10 +351,10 @@ namespace Kinoteatr {
 					}
 				);
 			}
-			SeansList.Clear();
+			_seansList.Clear();
 			// Заполняем список сеансов по умолчанию
-			for (int i = 0; i < 8; i++) {
-				SeansList.Add(
+			for (var i = 0; i < 8; i++) {
+				_seansList.Add(
 					new Seans {
 						Film = "Форсаж " + (i + 1),
 						Places = FillPlaces()
@@ -353,22 +363,30 @@ namespace Kinoteatr {
 			}
 			lbSeansList.Items.Clear();
 			// Заполняем список сеансов на форму
-			foreach (var seans in SeansList) {
+			foreach (var seans in _seansList) {
 				lbSeansList.Items.Add(seans.Film);
 			}
 		}
-
+		/// <summary>
+		/// перед закрытием формы
+		/// </summary>
 		private void Form1_FormClosing(object sender, FormClosingEventArgs e) {
 			LinqWriteXml("data.xml");
 		}
-
+		/// <summary>
+		/// Пункт меню "Добавить сеанс"
+		/// </summary>
 		private void добавитьСеансToolStripMenuItem_Click(object sender, EventArgs e) {
 			groupBox2.Visible = true;
 			tbNewSeans.Focus();
 		}
-
+		/// <summary>
+		/// Добавить сеанс
+		/// </summary>
+		/// <param name="sender"></param>
+		/// <param name="e"></param>
 		private void btnAddSeans_Click(object sender, EventArgs e) {
-			SeansList.Add(
+			_seansList.Add(
 				new Seans {
 					Film = tbNewSeans.Text,
 					Places = FillPlaces()
@@ -376,7 +394,7 @@ namespace Kinoteatr {
 			);
 			lbSeansList.Items.Clear();
 			// Заполняем список сеансов на форму
-			foreach (var item in SeansList) {
+			foreach (var item in _seansList) {
 				lbSeansList.Items.Add(item.Film);
 			}
 			groupBox2.Visible = false;

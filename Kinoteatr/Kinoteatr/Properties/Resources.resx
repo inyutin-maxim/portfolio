@@ -117,4 +117,16 @@
   <data name="PleaseSelectSeance" xml:space="preserve">
     <value>Пожалуйста выберите сеанс</value>
   </data>
+  <data name="uncheck" xml:space="preserve">
+    <value>Вы уверены что хотите снять бронь с этого места?</value>
+  </data>
+  <data name="info" xml:space="preserve">
+    <value>Информация</value>
+  </data>
+  <data name="freePlaces" xml:space="preserve">
+    <value>На данный сеанс доступны свободные места.</value>
+  </data>
+  <data name="nonFreePlaces" xml:space="preserve">
+    <value>Нет доступных свободных мест.</value>
+  </data>
 </root>

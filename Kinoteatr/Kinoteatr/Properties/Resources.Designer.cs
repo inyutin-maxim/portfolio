@@ -61,11 +61,47 @@ namespace Kinoteatr.Properties {
         }
         
         /// <summary>
+        ///   Ищет локализованную строку, похожую на На данный сеанс доступны свободные места..
+        /// </summary>
+        internal static string freePlaces {
+            get {
+                return ResourceManager.GetString("freePlaces", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Информация.
+        /// </summary>
+        internal static string info {
+            get {
+                return ResourceManager.GetString("info", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Нет доступных свободных мест..
+        /// </summary>
+        internal static string nonFreePlaces {
+            get {
+                return ResourceManager.GetString("nonFreePlaces", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Ищет локализованную строку, похожую на Пожалуйста выберите сеанс.
         /// </summary>
         internal static string PleaseSelectSeance {
             get {
                 return ResourceManager.GetString("PleaseSelectSeance", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Вы уверены что хотите снять бронь с этого места?.
+        /// </summary>
+        internal static string uncheck {
+            get {
+                return ResourceManager.GetString("uncheck", resourceCulture);
             }
         }
     }
