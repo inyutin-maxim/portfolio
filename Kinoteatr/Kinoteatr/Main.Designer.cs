@@ -56,6 +56,9 @@ namespace Kinoteatr
 			this.pictureBox5 = new System.Windows.Forms.PictureBox();
 			this.label6 = new System.Windows.Forms.Label();
 			this.groupBox3 = new System.Windows.Forms.GroupBox();
+			this.toolStripMenuItem3 = new System.Windows.Forms.ToolStripSeparator();
+			this.показатьФормуПользователяToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+			this.btnShowClientForm = new System.Windows.Forms.Button();
 			this.contextMenuStrip1.SuspendLayout();
 			this.groupBox2.SuspendLayout();
 			((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
@@ -84,9 +87,11 @@ namespace Kinoteatr
             this.ToolStripMenuItem1,
             this.ToolStripMenuItemDay,
             this.toolStripMenuItem2,
-            this.добавитьСеансToolStripMenuItem});
+            this.добавитьСеансToolStripMenuItem,
+            this.toolStripMenuItem3,
+            this.показатьФормуПользователяToolStripMenuItem});
 			this.contextMenuStrip1.Name = "contextMenuStrip1";
-			this.contextMenuStrip1.Size = new System.Drawing.Size(277, 104);
+			this.contextMenuStrip1.Size = new System.Drawing.Size(277, 132);
 			// 
 			// ToolStripMenuItemSeans
 			// 
@@ -293,11 +298,27 @@ namespace Kinoteatr
 			this.groupBox3.TabStop = false;
 			this.groupBox3.Text = "Легенда";
 			// 
+			// toolStripMenuItem3
+			// 
+			this.toolStripMenuItem3.Name = "toolStripMenuItem3";
+			this.toolStripMenuItem3.Size = new System.Drawing.Size(273, 6);
+			// 
+			// btnShowClientForm
+			// 
+			this.btnShowClientForm.Location = new System.Drawing.Point(462, 270);
+			this.btnShowClientForm.Name = "btnShowClientForm";
+			this.btnShowClientForm.Size = new System.Drawing.Size(140, 23);
+			this.btnShowClientForm.TabIndex = 6;
+			this.btnShowClientForm.Text = "Форма пользователя";
+			this.btnShowClientForm.UseVisualStyleBackColor = true;
+			this.btnShowClientForm.Click += new System.EventHandler(this.btnShowClientForm_Click);
+			// 
 			// Main
 			// 
 			this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
 			this.ClientSize = new System.Drawing.Size(614, 303);
+			this.Controls.Add(this.btnShowClientForm);
 			this.Controls.Add(this.groupBox3);
 			this.Controls.Add(this.groupBox2);
 			this.Controls.Add(this.btnSetTestData);
@@ -355,6 +376,9 @@ namespace Kinoteatr
 		private System.Windows.Forms.PictureBox pictureBox5;
 		private System.Windows.Forms.Label label6;
 		private System.Windows.Forms.GroupBox groupBox3;
+		private System.Windows.Forms.ToolStripSeparator toolStripMenuItem3;
+		private System.Windows.Forms.ToolStripMenuItem показатьФормуПользователяToolStripMenuItem;
+		private System.Windows.Forms.Button btnShowClientForm;
     }
 }
 

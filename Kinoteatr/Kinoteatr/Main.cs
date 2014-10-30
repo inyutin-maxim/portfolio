@@ -127,6 +127,7 @@ namespace Kinoteatr {
 			var element = new XElement( "head" );
 			foreach ( var item in _seansList ) {
 				var subElement = new XElement( item.Film.Replace( " ", "_" ) );
+				subElement.SetAttributeValue("time", item.Time);
 				foreach ( var place in item.Places ) {
 					subElement.Add(
 						new XElement( "Place",
@@ -179,10 +180,13 @@ namespace Kinoteatr {
 						);
 				}
 				var filmName = film.Name.LocalName;
+				DateTime time;
+				DateTime.TryParse( film.Attribute( "time" ).Value, out time );
 				_seansList.Add(
 					new Seans {
 						Film = filmName,
-						Places = tempPlaces
+						Places = tempPlaces,
+						Time = time
 					}
 					);
 			}
@@ -207,6 +211,12 @@ namespace Kinoteatr {
 			for ( var i = 3; i < 8; i++ ) {
 				_placeList.Add( AddBtn( _btnX[ i ], _btnY[ 0 ], index, _btnClr[ GetColorIndex( index ) ] ) );
 				index++;
+			}
+			btnShowClientForm.Visible = _seansList.Count > 0;
+			btnSetTestData.Visible = !btnShowClientForm.Visible;
+			if ( _seansList.Count > 0 ) {
+				SeansInfo.Seans = _seansList[ 0 ];
+				lbSeansList.SelectedIndex = 0;
 			}
 		}
 		/// <summary>
@@ -369,6 +379,12 @@ namespace Kinoteatr {
 			foreach ( var seans in _seansList ) {
 				lbSeansList.Items.Add( seans.Film );
 			}
+			btnShowClientForm.Visible = _seansList.Count > 0;
+			btnSetTestData.Visible = !btnShowClientForm.Visible;
+			if ( _seansList.Count > 0 ) {
+				SeansInfo.Seans = _seansList[ 0 ];
+				lbSeansList.SelectedIndex = 0;
+			}
 		}
 		/// <summary>
 		/// перед закрытием формы
@@ -401,6 +417,11 @@ namespace Kinoteatr {
 				lbSeansList.Items.Add( item.Film );
 			}
 			groupBox2.Visible = false;
+		}
+
+		private void btnShowClientForm_Click( object sender, EventArgs e ) {
+			var client = new Client();
+			client.ShowDialog();
 		}
 	}
 }
